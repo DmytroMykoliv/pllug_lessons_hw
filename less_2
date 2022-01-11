@@ -4,12 +4,10 @@
 while(true) {};
 
 // Words converter: small => big; big => small;
-function getLowUpString(str) {
+function stringConverter(str) {
   return str.split('').reduce((a, b) => {
-    if (b.toLowerCase() === b) {
-      return a + b.toUpperCase();
-    }
-    
-    return a + b.toLowerCase();
-  }, '')
-}
+    return b.toLowerCase() === b
+      ? a + b.toUpperCase()
+      : a + b.toLowerCase();
+  },'')
+};

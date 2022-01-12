@@ -19,9 +19,51 @@ Object.assign(newObj, { position: "FE" });
 newObj = { ...newObj, ...{ sity: "Lviv" }};
 // console.log(newObj);
 
+// create empty array
 const newArray = [];
+
+// create array with 100500 elements
 const array = new Array(100500);
 
+// create array with some elements;
+const fullArray = [1, 3, 5, 9];
+// make the filled array empty
+fullArray.length = 0;
+
+// function that removes an element from an array by its index and returns a new array
+const initialArr =  [1,2,3,4,5];
+function getArrayWithoutElement(arr, index) {
+  return arr.filter((_, i) => i !== index);
+}
+// console.log(getArrayWithoutElement(initialArr, 3));
+
+// function that check if array empty
+function isArrayEmpty(arr) {
+  return arr.length === 0;
+}
+
+// function that combines two arrays into one and returns it as a result
+function getArrayFromArrays(arr1, arr2) {
+  return arr1.concat(arr2);
+}
+
+// get array with element in 3 degree
+function getArrayTo3(arr) {
+  return arr.map(item => item ** 3);
+}
+
+// get array with odd element
+function getArrayWithOdd(arr) {
+  return arr.filter(item => item % 2 === 1);
+}
+
+// get array only with integer 
+function getArrayWithInteger(arr) {
+  return arr.filter(item => Number.isInteger(item)); //or  item % 1 === 0
+}
+
+// function that return undefine
+function someFun() {}
 
 
 

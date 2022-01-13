@@ -1,16 +1,19 @@
 'use strict';
 
 // create new object
-let newObj = {}; // or new Object();
+let newObj = {};
+// let newObj = new Object();
+// let newObj = Object.create(Object.prototype);
 // console.log(newObj);
 
 // create new object without prototype
 const objNull = Object.setPrototypeOf({}, null);
-// console.log(newNull);
+// const objNull = Object.create(null);
+// console.log(objNull);
 // or
 const objNull2 = {};
 ogjNull2.__proto__ = null;
-// console.log(newNull2);
+// console.log(objNull2);
 
 // add new keys to the object in different ways
 newObj.name = "Dima";

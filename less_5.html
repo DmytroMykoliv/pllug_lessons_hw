@@ -10,8 +10,8 @@
        <li id="cat" class="pet">Cat</li>
        <li class="wild">Elephant</li>
        <li class="wild">Whale</li>
-       <li class="wild">Horse</li>
        <li class="wild dangerous">Tiger</li>
+       <li class="wild">Horse</li>
      </ul>
      <ul id="birds">
        <li class="wild">Eagle</li>
@@ -20,7 +20,37 @@
      </ul>
    </div>
    <script>
-     //...
+    // rise font size for animals
+    document.querySelector('#animals').style.fontSize = '20px';
+    console.log(document.querySelector('.container'));
+
+    // remove class name of last animals element
+    let animals = document.querySelector('#animals');
+    animals.lastElementChild.removeAttribute('class')
+
+    // change the background-color of the next element after the element with id = "cat"
+    let cat = document.getElementById('cat');
+    cat.nextElementSibling.style.background = '#ccc';
+
+    // change color for all dangerous classes
+    let dangerous = document.getElementsByClassName('dangerous');
+    for (let el of dangerous) {
+      el.style.color = 'red';
+    }
+
+    // delete all class with name 'pet'
+    let pets = document.querySelectorAll('.pet');
+    pets.forEach(el => {
+      el.classList.remove('pet');
+    });
+
+    //  add new element to birds list, element must by the first on the list
+    let birds = document.getElementById('birds');
+    let newBird = document.createElement('li');
+    birds.insertBefore(newBird, birds.firstChild);
+    newBird.innerHTML = 'Swallow';
+
+    //  
    </script>
  </body>
 </html>

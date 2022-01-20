@@ -51,6 +51,14 @@
     newBird.innerHTML = 'Swallow';
 
     //  
+    
+    
+    // add a new list with id = "fish" before the bird list
+    let fishUl = document.createElement('ul');
+    fishUl.setAttribute('id', 'fish');
+    birds.before(fishUl);
+    
+    
    </script>
  </body>
 </html>

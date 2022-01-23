@@ -58,7 +58,16 @@
     fishUl.setAttribute('id', 'fish');
     birds.before(fishUl);
     
-    
+    // function that converts classes of animal list elements and adds data- attributes to these elements
+    animalsChildren.forEach(item => {
+      let classList = item.classList;
+      if (classList) {
+        classList.forEach(className => {
+          item.dataset[className] = "";
+          item.removeAttribute("class");
+        })
+      }
+    })
    </script>
  </body>
 </html>

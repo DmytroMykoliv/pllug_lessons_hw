@@ -1,73 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
  <head>
-   <title>Homework</title>
+  <title>Homework</title>
  </head>
  <body>
-   <div class="container">
-     <ul id="animals">
-       <li class="pet">Dog</li>
-       <li id="cat" class="pet">Cat</li>
-       <li class="wild">Elephant</li>
-       <li class="wild">Whale</li>
-       <li class="wild dangerous">Tiger</li>
-       <li class="wild">Horse</li>
-     </ul>
-     <ul id="birds">
-       <li class="wild">Eagle</li>
-       <li class="wild">Sparrow</li>
-       <li class="pet wild">Parrot</li>
-     </ul>
-   </div>
-   <script>
+  <div class="container">
+    <ul id="animals">
+      <li class="pet">Dog</li>
+      <li id="cat" class="pet">Cat</li>
+      <li class="wild">Elephant</li>
+      <li class="wild">Whale</li>
+      <li class="wild dangerous">Tiger</li>
+      <li class="wild">Horse</li>
+    </ul>
+    <ul id="birds">
+      <li class="wild">Eagle</li>
+      <li class="wild">Sparrow</li>
+      <li class="pet wild">Parrot</li>
+    </ul>
+  </div>
+  <script>
+    const animals = document.querySelector('#animals');
+    const cat = document.getElementById('cat');
+    const pets = document.querySelectorAll('.pet');
+    const birds = document.getElementById('birds');
+
     // rise font size for animals
-    document.querySelector('#animals').style.fontSize = '20px';
-    console.log(document.querySelector('.container'));
+    function riseFontSize() {
+      document.querySelector('#animals').style.fontSize = '20px';
+    };
+    // riseFontSize();
+
 
     // remove class name of last animals element
-    let animals = document.querySelector('#animals');
-    animals.lastElementChild.removeAttribute('class')
+    function removeLastClassName() {
+      animals.lastElementChild.removeAttribute('class');
+    }
+    // removeLastClassName();
+
 
     // change the background-color of the next element after the element with id = "cat"
-    let cat = document.getElementById('cat');
-    cat.nextElementSibling.style.background = '#ccc';
+    function changeBgColor() {
+      cat.nextElementSibling.style.background = '#ccc';
+    }
+    // changeBgColor();
+
 
     // change color for all dangerous classes
-    let dangerous = document.getElementsByClassName('dangerous');
-    for (let el of dangerous) {
-      el.style.color = 'red';
+    function changeColorFor(className) {
+      const elements = document.getElementsByClassName(className);
+      for (let el of elements) {
+        el.style.color = 'red';
+      }
     }
+    // changeColorFor('dangerous');
+
 
     // delete all class with name 'pet'
-    let pets = document.querySelectorAll('.pet');
-    pets.forEach(el => {
-      el.classList.remove('pet');
-    });
+    function deleteAllClass(className) {
+      pets.forEach(el => {
+        el.classList.remove(className);
+      });
+    };
+    // deleteAllClass('pet');
+
 
     //  add new element to birds list, element must by the first on the list
-    let birds = document.getElementById('birds');
-    let newBird = document.createElement('li');
-    birds.insertBefore(newBird, birds.firstChild);
-    newBird.innerHTML = 'Swallow';
+    function addNewFirsElement(tag, text) {
+      const newBirdFirst = document.createElement('li');
+      birds.insertBefore(newBirdFirst, birds.firstChild);
+      newBirdFirst.textContent = text;
+    }
+    // addNewFirsElement('li', 'Swallow');
 
-    //  
-    
-    
+
+    //  add new element to birds list, element must by the last on the list
+    function addNewLastElement(tag, text) {
+      const newBirdLast = document.createElement(tag);
+      newBirdLast.textContent = text;
+      birds.appendChild(newBirdLast);
+    }
+    // addNewLastElement('li', 'Hummingbird');
+
+
     // add a new list with id = "fish" before the bird list
-    let fishUl = document.createElement('ul');
-    fishUl.setAttribute('id', 'fish');
-    birds.before(fishUl);
-    
+    function newListWithId(nameId) {
+      const newList = document.createElement('ul');
+      newList.setAttribute('id', nameId);
+
+      birds.before(newList);
+      const fishes = ['Trout', 'Perch', 'Sea bass'];
+      
+      /* ===================== version 1 =========================  */
+      // fishes.forEach(fish => {
+      //   let fishLi = document.createElement('li');
+      //   fishLi.textContent = fish;
+      //   newList.append(fishLi);
+      // })
+      /* =========================================================  */
+
+      /* ===================== version 2 ==========================  */
+      newList.innerHTML = `
+        ${fishes.map(item => `<li>${item}</li>`)
+          .join('')}
+      `;
+      /* =========================================================  */
+    };
+    // newListWithId('fish');
+
+
+    // changes the order of items in the animals list
+    function changeOrderForAnimals() {
+      animals.querySelectorAll('li').forEach(item => {
+        animals.prepend(item);
+      })
+    }
+    // changeOrderForAnimals();
+
+
     // function that converts classes of animal list elements and adds data- attributes to these elements
-    animalsChildren.forEach(item => {
-      let classList = item.classList;
-      if (classList) {
-        classList.forEach(className => {
-          item.dataset[className] = "";
-          item.removeAttribute("class");
-        })
+    function convertClassesToData() {
+      const animalsChildren = animals.children;
+
+      for (let item of animalsChildren) {
+        let classList = item.classList;
+  
+        if (classList) {
+          classList.forEach(className => {
+            item.dataset[className] = "";
+          });
+        };
+  
+        item.removeAttribute("class");
       }
-    })
-   </script>
+    }
+    // convertClassesToData();
+  </script>
  </body>
 </html>

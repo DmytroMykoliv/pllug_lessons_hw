@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap" rel="stylesheet">
+  <title>Homework 6</title>
+</head>
+<body>
+  <div class="container">
+    <form id="form" action="#" method="GET">
+      <fieldset>
+        <legend id="nicknameLegend">0</legend>
+        <input id="nickname" type="text" placeholder="nickname">
+      </fieldset>
+
+      <fieldset>
+        <legend id="nameLegend">0</legend>
+        <input id="name" type="text" placeholder="name">
+      </fieldset>
+
+      <fieldset>
+        <legend id="commentLegend">0</legend>
+        <textarea name="comment" id="comment" cols="30" rows="10" placeholder="Comment"></textarea>
+      </fieldset>
+
+      <button id="btn" type="submit">Add comment</button>
+    </form>
+  </div>
+</body>
+
+<script>
+  const form = document.getElementById('form');
+  const nickName = document.getElementById('nickname');
+  const name = document.getElementById('name');
+  const comment = document.getElementById('comment');
+  const submitBtn = document.getElementById('btn');
+
+  const nicknameLegend = document.getElementById('nicknameLegend');
+  const nameLegend = document.getElementById('nameLegend');
+  const commentLegend = document.getElementById('commentLegend');
+
+  let isNickName = false;
+  let isName = false;
+  let isComment = false;
+  submitBtn.disabled = true;
+
+  nickName.addEventListener('input', () => {
+    nickName.value = nickName.value.replace(/[^A-Za-z0-9]/ig, '');
+    nicknameLegend.textContent = nickName.value.length;
+
+    if (nickName.value.length < 3 || nickName.value.length > 24 || !/[a-zA-Z]/.test(nickName.value)) {
+      nickName.style.outlineColor = 'red';
+      nickName.style.borderColor = 'red';
+
+      isNickName = false;
+      submitBtn.disabled = !isNickName || !isName || !isComment;
+    } else {
+      nickName.style.outlineColor = 'black';
+      nickName.style.borderColor = '';
+
+      isNickName = true;
+      submitBtn.disabled = !isNickName || !isName || !isComment;
+    }
+  });
+
+  name.addEventListener('input', () => {
+    name.value = name.value.replace(/[^A-Za-z]/ig, '');
+    nameLegend.textContent = name.value.length;
+
+    if (name.value.length < 1 || name.value.length > 100) {
+      name.style.outlineColor = 'red';
+      name.style.borderColor = 'red';
+
+      isName = false;
+      submitBtn.disabled = !isNickName || !isName || !isComment;
+    } else {
+      name.style.outlineColor = 'black';
+      name.style.borderColor = '';
+
+      isName = true;
+      submitBtn.disabled = !isNickName || !isName || !isComment;
+    }
+  });
+
+  comment.addEventListener('input', () => {
+    comment.value = comment.value.replace(/[^A-Za-z \.\,?!-]/ig, '');
+    commentLegend.textContent = comment.value.length;
+
+    if (comment.value.length < 1 || comment.value.length > 1000) {
+      comment.style.outlineColor = 'red';
+      comment.style.borderColor = 'red';
+
+      isComment = false;
+      submitBtn.disabled = !isNickName || !isName || !isComment;
+    } else {
+      comment.style.outlineColor = 'black';
+      comment.style.borderColor = '';
+
+      isComment = true;
+      submitBtn.disabled = !isNickName || !isName || !isComment;
+    }
+  });
+
+  function submitForm(e) {
+    e.preventDefault();
+
+    const div = document.createElement('DIV');
+    div.classList.add('post');
+
+    div.innerHTML = `
+      <p class="nickname">${nickName.value} - ${name.value}</p>
+      <p class="comment">${comment.value}</p>
+      <hr>
+    `;
+
+    form.after(div);
+    resetForm();
+  }
+
+  function resetForm() {
+    nickName.value = '';
+    name.value = '';
+    comment.value = '';
+
+    isNickName = false;
+    isName = false;
+    isComment= false;
+
+    nicknameLegend.textContent = 0;
+    nameLegend.textContent = 0;
+    commentLegend.textContent = 0;
+
+    submitBtn.disabled = true;
+  }
+
+  form.addEventListener('submit', submitForm);
+</script>
+</html>
